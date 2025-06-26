@@ -47,4 +47,12 @@ public class Library {
             System.out.println(user.toString());
         }
     }
+
+    public Map<Integer, User> getUsers() {
+        return users;
+    }
+
+    public Map<Integer, Book> getBooks() {
+        return books;
+    }
 }

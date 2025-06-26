@@ -3,9 +3,10 @@ package com.lohithpuvvala;
 import java.util.Scanner;
 
 public class Main {
+    static Scanner in = new Scanner(System.in);
+    static Library library = new Library();
+
     public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        Library library = new Library();
 
         // Preload sample books
         library.addBook("Clean Code", "Robert C. Martin");
@@ -41,36 +42,24 @@ public class Main {
             switch (choice) {
                 case 1:
                     // Add a book to the Library
-                    System.out.println("=== To Add a new Book ===");
-                    System.out.println("=> Enter Book Title: ");
-                    String bookTitle = in.nextLine();
-                    System.out.println("=> Enter Author Name: ");
-                    String bookAuthor = in.nextLine();
-                    System.out.println("=> Updating Book Details.....");
-                    library.addBook(bookTitle, bookAuthor);
-                    System.out.println("=> Successfully added Book to the Library");
+                    addBook();
                     break;
                 case 2:
                     // Register user to the Library
-                    System.out.println("=== To Register User ===");
-                    System.out.println("=> Enter User Name: ");
-                    String userName = in.nextLine();
-                    library.registerUser(userName);
-                    System.out.println("=> Successfully registered User");
+                    registerUser();
                     break;
                 case 3:
                     // Issue book logic
+                    issueBook();
                     break;
                 case 4:
                     // Return book logic
                     break;
                 case 5:
-                    System.out.println("=> Displaying All Books in the Library:");
-                    library.displayAllBooks();
+                    displayAllBooks();
                     break;
                 case 6:
-                    System.out.println("=> Displaying All Users in the Library:");
-                    library.displayAllUsers();
+                    displayAllUsers();
                     break;
                 case 0:
                     System.out.println("=> Exiting.... Thank you!");
@@ -86,5 +75,60 @@ public class Main {
                 return;
             }
         }
+    }
+
+    static void addBook() {
+        System.out.println("=== To Add a new Book ===");
+        System.out.println("=> Enter Book Title: ");
+        String bookTitle = in.nextLine();
+        System.out.println("=> Enter Author Name: ");
+        String bookAuthor = in.nextLine();
+        System.out.println("=> Updating Book Details.....");
+        library.addBook(bookTitle, bookAuthor);
+        System.out.println("=> Successfully added Book to the Library");
+    }
+
+    static void registerUser() {
+        System.out.println("=== To Register User ===");
+        System.out.println("=> Enter User Name: ");
+        String userName = in.nextLine();
+        library.registerUser(userName);
+        System.out.println("=> Successfully registered User");
+    }
+
+    static void issueBook() {
+        System.out.println("=== To Issue Book ===");
+        System.out.println("=> Enter Book Id: ");
+        int bookId = in.nextInt();
+        in.nextLine();
+        if(!library.getBooks().containsKey(bookId)) {
+            System.out.println("Invalid Book Id");
+            return;
+        }
+        if(library.getBooks().get(bookId).isIssued()) {
+            System.out.println("Book already issued");
+            return;
+        }
+
+        System.out.println("=> Enter User Id: ");
+        int userId = in.nextInt();
+        in.nextLine();
+
+        if(!library.getUsers().containsKey(userId)) {
+            System.out.println("Invalid User Id");
+            return;
+        }
+        library.issueBookToUser(userId, bookId);
+        System.out.println("=> Successfully issued Book");
+    }
+
+    static void displayAllBooks() {
+        System.out.println("=> Displaying All Books in the Library:");
+        library.displayAllBooks();
+    }
+
+    static void displayAllUsers() {
+        System.out.println("=> Displaying All Users in the Library:");
+        library.displayAllUsers();
     }
 }
