@@ -29,7 +29,13 @@ public class Library {
     }
 
     public void issueBookToUser(int bookId, int userId) {
+        User user = users.get(userId);
+        Book book = books.get(bookId);
 
+        user.issuedBooks.add(book);
+        book.setIssued(true);
+
+        System.out.println("=> Issued: "+book.getTitle()+" by "+book.getAuthor()+" (ID: "+book.getId()+") Issued to "+user.getName()+" (ID: "+user.getUserId()+")");
     }
 
     public void returnBookFromUser(int bookId, int userId) {
