@@ -47,6 +47,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return isIssued ? "- (NOT Available) "+title+" by "+author+" " : "- "+title+" by "+author;
+        return isIssued ? "- (NOT Available) "+title+" by "+author+" id: "+id : "- "+title+" by "+author+" id:"+id;
     }
 }

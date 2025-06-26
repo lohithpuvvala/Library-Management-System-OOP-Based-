@@ -5,9 +5,10 @@ import java.util.List;
 import java.util.Map;
 
 public class Library {
-    private List<User> users;
-    private List<Book> books;
+    private final List<User> users;
+    private final List<Book> books;
     private static int bookId = 0;
+    private static int userId = 0;
 
     public Library() {
         users = new ArrayList<>();
@@ -20,8 +21,10 @@ public class Library {
         System.out.println("=> Added:"+newBook.toString());
     }
 
-    public void registerUser(User user) {
-        users.add(user);
+    public void registerUser(String name) {
+        User newUser = new User(++userId,name);
+        users.add(newUser);
+        System.out.println("=> New User Registered: "+newUser.toString());
     }
 
     public void issueBookToUser(int bookId, int userId) {
@@ -39,6 +42,8 @@ public class Library {
     }
 
     public void displayAllUsers(){
-
+        for (User user : users){
+            System.out.println(user.toString());
+        }
     }
 }

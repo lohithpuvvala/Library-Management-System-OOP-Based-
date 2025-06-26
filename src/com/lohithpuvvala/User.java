@@ -8,7 +8,8 @@ public class User {
     private String name;
     List<Book> issuedBooks;
 
-    public User(String name) {
+    public User(int id, String name) {
+        this.userId = id;
         this.name = name;
         issuedBooks = new ArrayList<>();
     }
@@ -39,5 +40,10 @@ public class User {
 
     public void viewIssuedBooks() {
 
+    }
+
+    @Override
+    public String toString() {
+        return " Name: "+name+" - Id: "+userId+"\n IssuedBooks: "+issuedBooks;
     }
 }

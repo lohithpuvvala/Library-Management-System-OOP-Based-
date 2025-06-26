@@ -14,6 +14,15 @@ public class Main {
         library.addBook( "The Pragmatic Programmer", "Andrew Hunt");
         library.addBook( "Introduction to Algorithms", "Cormen et al.");
 
+        // Preload sample users
+        library.registerUser("Lohith Puvvala");
+        library.registerUser("Aarav Mehta");
+        library.registerUser("Sneha Reddy");
+        library.registerUser("Rahul Sharma");
+        library.registerUser("Priya Iyer");
+        library.registerUser("Karthik Nair");
+        library.registerUser("Ananya Verma");
+
         // Menu Loop Starts
         while (true) {
             System.out.println("\n====== Library Management Menu ======");
@@ -31,7 +40,7 @@ public class Main {
 
             switch (choice) {
                 case 1:
-                    // Add book logic
+                    // Add a book to the Library
                     System.out.println("=== To Add a new Book ===");
                     System.out.println("=> Enter Book Title: ");
                     String bookTitle = in.nextLine();
@@ -42,7 +51,12 @@ public class Main {
                     System.out.println("=> Successfully added Book to the Library");
                     break;
                 case 2:
-                    // Register user logic
+                    // Register user to the Library
+                    System.out.println("=== To Register User ===");
+                    System.out.println("=> Enter User Name: ");
+                    String userName = in.nextLine();
+                    library.registerUser(userName);
+                    System.out.println("=> Successfully registered User");
                     break;
                 case 3:
                     // Issue book logic
@@ -55,6 +69,7 @@ public class Main {
                     library.displayAllBooks();
                     break;
                 case 6:
+                    System.out.println("=> Displaying All Users in the Library:");
                     library.displayAllUsers();
                     break;
                 case 0:
