@@ -69,4 +69,8 @@ public class Library {
     public Map<Integer, Book> getBooks() {
         return books;
     }
+
+    public Map<Integer, Integer> getIssuedBookIdToUserId() {
+        return issuedBookIdToUserId;
+    }
 }

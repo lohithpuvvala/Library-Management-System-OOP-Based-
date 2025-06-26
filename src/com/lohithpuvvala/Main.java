@@ -34,6 +34,7 @@ public class Main {
             System.out.println("5. View All Books");
             System.out.println("6. View All Users");
             System.out.println("7. User Details by Id");
+            System.out.println("8. Check Book Availability");
             System.out.println("0. Exit");
             System.out.print("Choose an option: ");
 
@@ -67,6 +68,9 @@ public class Main {
                     //User Details by ID
                     getUserDetailsById();
                     break;
+                case 8:
+                    checkBookAvailability();
+                    break;
                 case 0:
                     System.out.println("=> Exiting.... Thank you!");
                     return;
@@ -80,6 +84,18 @@ public class Main {
                 System.out.println("=> Exiting.... Thank you!");
                 return;
             }
+        }
+    }
+
+    private static void checkBookAvailability() {
+        System.out.println("=> Checking Book Availability");
+        System.out.println("Enter Book Id: ");
+        int bookId = in.nextInt();
+        in.nextLine();
+        if(library.getIssuedBookIdToUserId().containsKey(bookId)){
+            System.out.println("=> Book Id: " + bookId + " is already issued");
+        }else {
+            System.out.println("=> Book Id: " + bookId + " is available");
         }
     }
 
