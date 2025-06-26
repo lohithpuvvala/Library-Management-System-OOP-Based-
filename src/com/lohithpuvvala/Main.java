@@ -79,10 +79,21 @@ public class Main {
 
     static void addBook() {
         System.out.println("=== To Add a new Book ===");
+
         System.out.println("=> Enter Book Title: ");
         String bookTitle = in.nextLine();
+        while(bookTitle.isBlank()) {
+            System.out.println("=> Invalid Book Title. Please enter a valid Book Title: ");
+            bookTitle = in.nextLine();
+        }
+
         System.out.println("=> Enter Author Name: ");
         String bookAuthor = in.nextLine();
+        while(bookAuthor.isBlank()) {
+            System.out.println("=> Invalid Author Name. Please enter a valid Author Name: ");
+            bookAuthor = in.nextLine();
+        }
+
         System.out.println("=> Updating Book Details.....");
         library.addBook(bookTitle, bookAuthor);
         System.out.println("=> Successfully added Book to the Library");
@@ -90,8 +101,14 @@ public class Main {
 
     static void registerUser() {
         System.out.println("=== To Register User ===");
+
         System.out.println("=> Enter User Name: ");
         String userName = in.nextLine();
+        while(userName.isBlank()) {
+            System.out.println("=> Invalid User Name. Please enter a valid User Name: ");
+            userName = in.nextLine();
+        }
+
         library.registerUser(userName);
         System.out.println("=> Successfully registered User");
     }
@@ -100,10 +117,9 @@ public class Main {
         System.out.println("=== To Issue Book ===");
         System.out.println("=> Enter Book Id: ");
         int bookId = in.nextInt();
-        in.nextLine();
-        if(!library.getBooks().containsKey(bookId)) {
-            System.out.println("Invalid Book Id");
-            return;
+        while(!library.getBooks().containsKey(bookId)) {
+            System.out.println("Invalid Book Id. Please try again: ");
+            bookId = in.nextInt();
         }
         if(library.getBooks().get(bookId).isIssued()) {
             System.out.println("Book already issued");
@@ -112,12 +128,12 @@ public class Main {
 
         System.out.println("=> Enter User Id: ");
         int userId = in.nextInt();
-        in.nextLine();
 
-        if(!library.getUsers().containsKey(userId)) {
-            System.out.println("Invalid User Id");
-            return;
+        while(!library.getUsers().containsKey(userId)) {
+            System.out.println("Invalid User Id, Please try again: ");
+            userId = in.nextInt();
         }
+        in.nextLine();
         library.issueBookToUser(userId, bookId);
         System.out.println("=> Successfully issued Book");
     }
