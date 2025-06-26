@@ -39,7 +39,13 @@ public class Library {
     }
 
     public void returnBookFromUser(int bookId, int userId) {
+        User user = users.get(userId);
+        Book book = books.get(bookId);
 
+        user.issuedBooks.remove(book);
+        book.setIssued(false);
+
+        System.out.println("=> Return: "+book.getTitle()+" by "+book.getAuthor()+" (ID: "+book.getId()+") Returned By "+user.getName()+" (ID: "+user.getUserId()+")");
     }
 
     public void displayAllBooks(){
