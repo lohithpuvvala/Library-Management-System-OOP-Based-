@@ -47,11 +47,6 @@ public class Book {
 
     @Override
     public String toString() {
-        return "Book{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", author='" + author + '\'' +
-                ", isIssued=" + isIssued +
-                '}';
+        return isIssued ? "- (NOT Available) "+title+" by "+author+" " : "- "+title+" by "+author;
     }
 }

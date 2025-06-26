@@ -4,19 +4,19 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        Scanner in = new Scanner(System.in);
         Library library = new Library();
 
         // Preload sample books
-        library.addBook(new Book(1, "Clean Code", "Robert C. Martin"));
-        library.addBook(new Book(2, "Effective Java", "Joshua Bloch"));
-        library.addBook(new Book(3, "Design Patterns", "Erich Gamma"));
-        library.addBook(new Book(4, "The Pragmatic Programmer", "Andrew Hunt"));
-        library.addBook(new Book(5, "Introduction to Algorithms", "Cormen et al."));
+        library.addBook("Clean Code", "Robert C. Martin");
+        library.addBook( "Effective Java", "Joshua Bloch");
+        library.addBook("Design Patterns", "Erich Gamma");
+        library.addBook( "The Pragmatic Programmer", "Andrew Hunt");
+        library.addBook( "Introduction to Algorithms", "Cormen et al.");
 
         // Menu Loop Starts
         while (true) {
-            System.out.println("\n=== Library Management Menu ===");
+            System.out.println("\n====== Library Management Menu ======");
             System.out.println("1. Add Book");
             System.out.println("2. Register User");
             System.out.println("3. Issue Book");
@@ -26,12 +26,20 @@ public class Main {
             System.out.println("0. Exit");
             System.out.print("Choose an option: ");
 
-            int choice = scanner.nextInt();
-            scanner.nextLine(); // Consume newline
+            int choice = in.nextInt();
+            in.nextLine(); // Consume newline
 
             switch (choice) {
                 case 1:
                     // Add book logic
+                    System.out.println("=== To Add a new Book ===");
+                    System.out.println("=> Enter Book Title: ");
+                    String bookTitle = in.nextLine();
+                    System.out.println("=> Enter Author Name: ");
+                    String bookAuthor = in.nextLine();
+                    System.out.println("=> Updating Book Details.....");
+                    library.addBook(bookTitle, bookAuthor);
+                    System.out.println("=> Successfully added Book to the Library");
                     break;
                 case 2:
                     // Register user logic
@@ -43,16 +51,24 @@ public class Main {
                     // Return book logic
                     break;
                 case 5:
+                    System.out.println("=> Displaying All Books in the Library:");
                     library.displayAllBooks();
                     break;
                 case 6:
                     library.displayAllUsers();
                     break;
                 case 0:
-                    System.out.println("Exiting.... Thank you!");
+                    System.out.println("=> Exiting.... Thank you!");
                     return;
                 default:
-                    System.out.println("Invalid choice.");
+                    System.out.println("=> Invalid choice.");
+            }
+
+            System.out.println("=> Do you want to exit the app? (Y/N)");
+            String exit =  in.nextLine();
+            if(exit.equalsIgnoreCase("y")){
+                System.out.println("=> Exiting.... Thank you!");
+                return;
             }
         }
     }

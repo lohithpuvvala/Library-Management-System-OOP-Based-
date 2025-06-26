@@ -1,5 +1,6 @@
 package com.lohithpuvvala;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class User {
@@ -9,6 +10,7 @@ public class User {
 
     public User(String name) {
         this.name = name;
+        issuedBooks = new ArrayList<>();
     }
 
     public int getUserId() {
