@@ -11,6 +11,8 @@ This is a basic Java console application that simulates a Library Management Sys
 * Issue and return books
 * Track issued books for each user
 * Display all books and user information
+* Displays Individual User Informtion.
+* Checks Book Availability.
 
 ---
 

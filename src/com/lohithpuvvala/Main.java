@@ -41,6 +41,7 @@ public class Main {
             int choice = in.nextInt();
             in.nextLine(); // Consume newline
 
+            //User Selected Operation is Performed
             switch (choice) {
                 case 1:
                     // Add a book to the Library
@@ -59,9 +60,11 @@ public class Main {
                     returnBook();
                     break;
                 case 5:
+                    //Displays all books in the Library
                     displayAllBooks();
                     break;
                 case 6:
+                    //Displays all users registered in the library
                     displayAllUsers();
                     break;
                 case 7:
@@ -69,15 +72,18 @@ public class Main {
                     getUserDetailsById();
                     break;
                 case 8:
+                    //Checks Book Availability using ID
                     checkBookAvailability();
                     break;
                 case 0:
+                    //Exit message
                     System.out.println("=> Exiting.... Thank you!");
                     return;
                 default:
                     System.out.println("=> Invalid choice.");
             }
 
+            //Prompt user to exit the App
             System.out.println("=> Do you want to exit the app? (Y/N)");
             String exit =  in.nextLine();
             if(exit.equalsIgnoreCase("y")){
@@ -89,9 +95,12 @@ public class Main {
 
     private static void checkBookAvailability() {
         System.out.println("=> Checking Book Availability");
+
         System.out.println("Enter Book Id: ");
         int bookId = in.nextInt();
-        in.nextLine();
+        in.nextLine();// consume newline
+
+        //checks if the book is already issued or not
         if(library.getIssuedBookIdToUserId().containsKey(bookId)){
             System.out.println("=> Book Id: " + bookId + " is already issued");
         }else {
@@ -104,6 +113,8 @@ public class Main {
 
         System.out.println("=> Enter Book Title: ");
         String bookTitle = in.nextLine();
+
+        //Loops until Valid Book Title is Entered
         while(bookTitle.isBlank()) {
             System.out.println("=> Invalid Book Title. Please enter a valid Book Title: ");
             bookTitle = in.nextLine();
@@ -111,6 +122,7 @@ public class Main {
 
         System.out.println("=> Enter Author Name: ");
         String bookAuthor = in.nextLine();
+        //Loops until Valid input is Entered
         while(bookAuthor.isBlank()) {
             System.out.println("=> Invalid Author Name. Please enter a valid Author Name: ");
             bookAuthor = in.nextLine();
@@ -126,6 +138,8 @@ public class Main {
 
         System.out.println("=> Enter User Name: ");
         String userName = in.nextLine();
+
+        //Loops until Valid User Name is Entered
         while(userName.isBlank()) {
             System.out.println("=> Invalid User Name. Please enter a valid User Name: ");
             userName = in.nextLine();
@@ -137,12 +151,16 @@ public class Main {
 
     static void issueBook() {
         System.out.println("=== To Issue Book ===");
+
         System.out.println("=> Enter Book Id: ");
         int bookId = in.nextInt();
+        //Loops until Valid BookId is Entered
         while(!library.getBooks().containsKey(bookId)) {
             System.out.println("Invalid Book Id. Please try again: ");
             bookId = in.nextInt();
         }
+
+        //Checks if Book Already Issued or Not
         if(library.getBooks().get(bookId).isIssued()) {
             System.out.println("Book already issued");
             return;
@@ -151,24 +169,29 @@ public class Main {
         System.out.println("=> Enter User Id: ");
         int userId = in.nextInt();
 
+        //Loops until valid UserID is Entered
         while(!library.getUsers().containsKey(userId)) {
             System.out.println("Invalid User Id, Please try again: ");
             userId = in.nextInt();
         }
-        in.nextLine();
+        in.nextLine();//consume newline
+
         library.issueBookToUser(bookId, userId);
         System.out.println("=> Successfully issued Book");
     }
 
     static void returnBook() {
         System.out.println("=== To Return Book ===");
+
         System.out.println("=> Enter Book Id: ");
         int bookId = in.nextInt();
+        //Loops until valid BookID is Entered
         while(!library.getBooks().containsKey(bookId)) {
             System.out.println("Invalid Book Id. Please try again: ");
             bookId = in.nextInt();
         }
 
+        //Checks if bookId is issued or not
         if(!library.getBooks().get(bookId).isIssued()) {
             System.out.println("Book has not been issued");
             return;
@@ -191,11 +214,12 @@ public class Main {
     static void getUserDetailsById() {
         System.out.println("=> Enter User Id: ");
         int userId = in.nextInt();
+        //Loops until valid userID is entered.
         while(!library.getUsers().containsKey(userId)) {
             System.out.println("Invalid User Id, Please try again: ");
             userId = in.nextInt();
         }
-        in.nextLine();
+        in.nextLine();//consume newline
         User user = library.getUsers().get(userId);
         System.out.println(user);
     }
