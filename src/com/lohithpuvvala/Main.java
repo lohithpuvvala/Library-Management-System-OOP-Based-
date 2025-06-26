@@ -33,6 +33,7 @@ public class Main {
             System.out.println("4. Return Book");
             System.out.println("5. View All Books");
             System.out.println("6. View All Users");
+            System.out.println("7. User Details by Id");
             System.out.println("0. Exit");
             System.out.print("Choose an option: ");
 
@@ -54,12 +55,17 @@ public class Main {
                     break;
                 case 4:
                     // Return book logic
+                    returnBook();
                     break;
                 case 5:
                     displayAllBooks();
                     break;
                 case 6:
                     displayAllUsers();
+                    break;
+                case 7:
+                    //User Details by ID
+                    getUserDetailsById();
                     break;
                 case 0:
                     System.out.println("=> Exiting.... Thank you!");
@@ -134,8 +140,26 @@ public class Main {
             userId = in.nextInt();
         }
         in.nextLine();
-        library.issueBookToUser(userId, bookId);
+        library.issueBookToUser(bookId, userId);
         System.out.println("=> Successfully issued Book");
+    }
+
+    static void returnBook() {
+        System.out.println("=== To Return Book ===");
+        System.out.println("=> Enter Book Id: ");
+        int bookId = in.nextInt();
+        while(!library.getBooks().containsKey(bookId)) {
+            System.out.println("Invalid Book Id. Please try again: ");
+            bookId = in.nextInt();
+        }
+
+        if(!library.getBooks().get(bookId).isIssued()) {
+            System.out.println("Book has not been issued");
+            return;
+        }
+
+        in.nextLine();
+        library.returnBookFromUser(bookId);
     }
 
     static void displayAllBooks() {
@@ -146,5 +170,17 @@ public class Main {
     static void displayAllUsers() {
         System.out.println("=> Displaying All Users in the Library:");
         library.displayAllUsers();
+    }
+
+    static void getUserDetailsById() {
+        System.out.println("=> Enter User Id: ");
+        int userId = in.nextInt();
+        while(!library.getUsers().containsKey(userId)) {
+            System.out.println("Invalid User Id, Please try again: ");
+            userId = in.nextInt();
+        }
+        in.nextLine();
+        User user = library.getUsers().get(userId);
+        System.out.println(user);
     }
 }
